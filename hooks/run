@@ -1,9 +1,12 @@
 
 Write-Host "Starting Apache Tomcat ..."
 
-$env:JAVA_HOME="{{pkgPathFor "winhab/coretto11"}}"
+If (Test-Path -Path ("{{pkgPathFor "winhab/coretto8/"}}") { $env:JAVA_HOME="{{pkgPathFor "winhab/corretto8"}}" }
+Elseif {"{{pkgPathFor "winhab/corrtto11/"}}"} { $env:JAVA_HOME="{{pkgPathFor "winhab/coretto11/"}}" }
+Else { Write-Error 'JAVA_HOME does not exist' -ErrorAction Stop }
+
 $env:TOMCAT_HOME="{{pkg.svc_var_path}}/tc"
 $env:CATALINA_OPTS="{{cfg.server.catalina-opts}}"
-
-Write-Host "Executing Tomcat here: ${TOMCAT_HOME}/bin/catalina.sh"
-Start-Process -FilePath "{{pkg.svc_var_path}}\tc\bin\catalina.bat" -ArgumentList "run" -Wait -NoNewWindow
+$env:CATALINA_HOME="$env:TOMCAT_HOME"
+Write-Host "Executing Tomcat here: $env:TOMCAT_HOME\bin\catalina.bat"
+Start-Process "$env:TOMCAT_HOME\bin\catalina.bat" run -Wait -windowstyle hidden
