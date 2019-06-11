@@ -1,0 +1,5 @@
+$pkg_origin="winhab"
+$pkg_name="tomcat8"
+$pkg_version="8.5.41"
+$pkg_release="20190611144404"
+$pkg_ident="winhab/tomcat8/8.5.41/20190611144404"
