@@ -15,7 +15,9 @@ $pkg_exports=@{
     "port"
   }
 # Tomcat for Windows is precompiled so we override the default build
-function Invoke-Build{}
+function Invoke-Before{ 
+  if ( Test-Path -Path "hooks.win/run" ) { Remove-Item -Path "hooks"; Rename-Item -Path "hooks.win" -NewName "hooks"  } else { "Windows files are ready" }
+}
 
 # Default install is to run `make` so we override the default
 function Invoke-Install{
