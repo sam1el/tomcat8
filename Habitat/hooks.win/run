@@ -1,7 +1,12 @@
 
 Write-Host "Starting Apache Tomcat ..."
 
-$env:JRE_HOME="{{pkgPathFor "winhab/corretto_jre8"}}\"
+if ( Test-path -Path "{{pkgPathFor "core/corretto8"}}" ) { $env:JAVA_HOME="{{pkgPathFor "core/corretto8"}}" }
+elseif ( Test-path -Path "{{pkgPathFor "core/corretto11"}}" { $env:JAVA_HOME="{{pkgPathFor "core/corretto11"}}" }
+else { "JDK Not present. Please verify dependencies." }
+
+
+$env:JRE_HOME="{{pkgPathFor "winhab/corretto8"}}\jre"
 $env:CATALINA_HOME="{{pkg.svc_var_path}}\tc"
 $env:CATALINA_OPTS="{{cfg.server.catalina-opts}}"
 
