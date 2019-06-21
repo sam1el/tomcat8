@@ -11,13 +11,8 @@ $pkg_shasum="117230aac76ecc1e9d04aff4e312dd9ff9ccb20d6246d0eef8199eec073f9778"
 $pkg_exports=@{port="server.port"}
 $pkg_exposes=@('port')
 
-<<<<<<< HEAD
-function Invoke-Before { 
-  if ( Test-Path -Path "hooks.win/run" ) { Remove-Item -Path "hooks"; Rename-Item -Path "hooks.win" -NewName "hooks"  } else { "Windows files are ready" }
-=======
 function Invoke-Before {
   if ( Test-Path -Path "hooks.win/run" ) { Rename-Item -Path "hooks.win" -NewName "hooks" } else { "Windows files are ready" }
->>>>>>> cf1e0d51a2c260da0c74bfab6e8b7e421a8eb28b
 }
 
 function Invoke-Install {
